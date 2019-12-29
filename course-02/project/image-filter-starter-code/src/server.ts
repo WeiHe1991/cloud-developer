@@ -31,14 +31,16 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   app.get("/filteredimage/", async (req, res) => {
     // vadilation
-    let {image_url} = req.query;
+    const {image_url} = req.query;
     // for now we just do a simple validation
     if (!image_url) {
       return res.status(400).send('invalid image URL');
     }
 
     const filteredPath = await filterImageFromURL(image_url);
-    res.status(200).sendFile(filteredPath);
+    res.status(200).sendFile(filteredPath, function cleanUp() {
+      deleteLocalFiles([filteredPath]);
+    });
   });
 
   //! END @TODO1

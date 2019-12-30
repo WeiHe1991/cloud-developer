@@ -13,7 +13,6 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-  // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
   // endpoint to filter an image from a public url.
   // IT SHOULD
@@ -28,11 +27,9 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-
   app.get("/filteredimage/", async (req, res) => {
     // vadilation
     const {image_url} = req.query;
-    // for now we just do a simple validation
     if (!image_url) {
       return res.status(400).send('invalid image URL');
     }
@@ -42,8 +39,6 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       deleteLocalFiles([filteredPath]);
     });
   });
-
-  //! END @TODO1
   
   // Root Endpoint
   // Displays a simple message to the user

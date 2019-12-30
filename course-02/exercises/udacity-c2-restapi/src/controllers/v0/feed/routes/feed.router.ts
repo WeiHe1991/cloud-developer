@@ -16,7 +16,6 @@ router.get('/', async (req: Request, res: Response) => {
     res.send(items);
 });
 
-//@TODO
 //Add an endpoint to GET a specific resource by Primary Key
 router.get('/:id', async (req: Request, res: Response) => {
     // validation:
@@ -37,7 +36,6 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.patch('/:id', 
     requireAuth, 
     async (req: Request, res: Response) => {
-        //@TODO try it yourself
         const {id} = req.params;
         if (!id) {
             return res.status(400).send('id is required but missing');
@@ -56,7 +54,6 @@ router.patch('/:id',
             return res.status(404).send('item with id=' + id + ' does not exist');
         }
 });
-
 
 // Get a signed url to put a new item in the bucket
 router.get('/signed-url/:fileName', 
